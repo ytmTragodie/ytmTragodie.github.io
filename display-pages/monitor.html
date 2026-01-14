@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能监测 - 智能健康管理平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .monitor-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 25px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            height: 400px;
+            position: relative;
+        }
+
+        .device-card {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 25px;
+            border-radius: var(--radius-md);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .device-card::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            background: radial-gradient(circle at top right, rgba(255,255,255,0.1) 0%, transparent 60%);
+        }
+
+        .ai-alert-box {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            border-left: 5px solid var(--primary);
+        }
+
+        .alert-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #ddd;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        .alert-warning {
+            background: #FFF3E0;
+            border-left-color: #FF9800;
+        }
+
+        .alert-danger {
+            background: #FFEBEE;
+            border-left-color: #F44336;
+        }
+
+        .realtime-value {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .pulse-dot {
+            width: 12px;
+            height: 12px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        /* Simulated Canvas/SVG Chart Area */
+        #glucoseChart {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding-top: 40px;
+        }
+        .chart-bar {
+            width: 10px;
+            background: var(--primary);
+            border-radius: 5px 5px 0 0;
+            transition: height 0.5s ease;
+            opacity: 0.6;
+        }
+        .chart-bar.active {
+            opacity: 1;
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="header">
+        <div class="container nav-container">
+            <div class="logo">HealthCare+</div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="community.html">健康社区</a>
+                <a href="diet.html">膳食科普</a>
+                <a href="mall.html">严选商城</a>
+                <a href="monitor.html" class="active">智能监测</a>
+            </div>
+            <button class="btn btn-outline" onclick="window.location.href='profile.html'">个人中心</button>
+        </div>
+    </nav>
+
+    <div class="container section">
+        
+        <div class="text-center mb-5">
+            <h2>医工交叉 · 智能慢病预警</h2>
+            <p class="text-secondary">AI 驱动的实时血糖监测与生活化干预系统</p>
+        </div>
+
+        <div class="monitor-grid">
+            
+            <!-- Left: Real-time Monitor -->
+            <div>
+                <!-- Device Status -->
+                <div class="device-card fade-in">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                                <span class="pulse-dot"></span>
+                                <span style="font-size: 0.9rem; opacity: 0.9;">设备已连接: H-Band Pro</span>
+                            </div>
+                            <h3 style="margin: 0; font-size: 1.2rem;">实时无创血糖监测中</h3>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="realtime-value" id="currentGlucose">6.2</div>
+                            <small>mmol/L</small>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; display: flex; gap: 20px; font-size: 0.9rem; opacity: 0.8;">
+                        <span>🔋 电量 85%</span>
+                        <span>📶 信号强</span>
+                        <span>❤️ 心率 78 bpm</span>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="chart-container fade-in" style="animation-delay: 0.1s;">
+                    <div style="position: absolute; top: 20px; left: 25px; font-weight: bold; color: var(--text-secondary);">
+                        24小时血糖趋势图
+                    </div>
+                    <div id="glucoseChart">
+                        <!-- Bars will be generated by JS -->
+                    </div>
+                    <!-- Y-axis labels simulated -->
+                    <div style="position: absolute; left: 5px; top: 50px; bottom: 20px; display: flex; flex-direction: column; justify-content: space-between; font-size: 0.8rem; color: #999;">
+                        <span>10.0</span>
+                        <span>7.0</span>
+                        <span>4.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: AI Intervention -->
+            <div>
+                <div class="ai-alert-box fade-in" style="animation-delay: 0.2s; height: 100%;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <span style="font-size: 1.5rem;">🤖</span>
+                        <h3 style="margin: 0;">AI 营养助手</h3>
+                    </div>
+                    
+                    <div id="aiFeed" style="display: flex; flex-direction: column; gap: 15px;">
+                        <!-- Alerts will be injected here -->
+                        <div class="alert-item">
+                            <small style="color: #666;">10:30</small>
+                            <p style="margin: 5px 0;"><strong>✅ 状态平稳</strong><br>您的血糖处于理想范围内，请继续保持。</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+                        <h4 style="font-size: 1rem; margin-bottom: 10px;">个性化干预建议</h4>
+                        <div class="card" style="background: #E3F2FD; border: none; padding: 15px;">
+                            <p style="font-size: 0.9rem; color: #1565C0;">
+                                根据您的代谢特征，建议您在午餐前先吃点蔬菜垫底，有助于平稳餐后血糖峰值。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Inline chart logic for simplicity in this specific file
+        document.addEventListener('DOMContentLoaded', () => {
+            const chart = document.getElementById('glucoseChart');
+            const currentValDisplay = document.getElementById('currentGlucose');
+            const aiFeed = document.getElementById('aiFeed');
+            
+            // 1. Generate initial bars
+            const barsCount = 30;
+            for(let i=0; i<barsCount; i++) {
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                // Random height between 30% and 70%
+                const h = 30 + Math.random() * 40;
+                bar.style.height = h + '%';
+                chart.appendChild(bar);
+            }
+
+            // 2. Simulate Real-time updates
+            setInterval(() => {
+                // Update Value
+                let current = parseFloat(currentValDisplay.innerText);
+                const change = (Math.random() - 0.5) * 0.4;
+                current = (current + change).toFixed(1);
+                
+                // Boundaries
+                if(current < 4.0) current = 4.0;
+                if(current > 12.0) current = 12.0;
+
+                currentValDisplay.innerText = current;
+
+                // Update Chart
+                const bars = document.querySelectorAll('.chart-bar');
+                // Shift heights
+                for(let i=0; i<bars.length-1; i++) {
+                    bars[i].style.height = bars[i+1].style.height;
+                }
+                // New last bar
+                // Map current value (4-12) to height percentage (20-90)
+                const newHeight = ((current - 4) / 8) * 70 + 20;
+                bars[bars.length-1].style.height = newHeight + '%';
+                bars[bars.length-1].classList.add('active');
+                setTimeout(() => bars[bars.length-1].classList.remove('active'), 400);
+
+                // AI Alerts Logic
+                checkAlerts(current);
+
+            }, 2000); // Update every 2 seconds
+
+            function checkAlerts(val) {
+                if (val > 8.5) {
+                    addAlert('⚠️ 血糖偏高', '检测到血糖上升趋势，建议暂停进食，饮用一杯温水。', 'alert-warning');
+                } else if (val > 10.0) {
+                    addAlert('🚨 血糖峰值预警', '您已接近血糖峰值！请立即停止碳水摄入。', 'alert-danger');
+                } else if (val < 4.5) {
+                    addAlert('⚠️ 血糖偏低', '检测到血糖偏低，建议补充一片全麦面包或少量水果。', 'alert-warning');
+                }
+            }
+
+            let lastAlertTime = 0;
+            function addAlert(title, msg, type) {
+                const now = Date.now();
+                if (now - lastAlertTime < 5000) return; // Prevent spamming
+                
+                lastAlertTime = now;
+                const timeStr = new Date().toLocaleTimeString('zh-CN', {hour: '2-digit', minute:'2-digit'});
+                
+                const html = `
+                    <div class="alert-item ${type}">
+                        <small style="color: #666;">${timeStr}</small>
+                        <p style="margin: 5px 0;"><strong>${title}</strong><br>${msg}</p>
+                    </div>
+                `;
+                
+                aiFeed.insertAdjacentHTML('afterbegin', html);
+                
+                // Keep only last 4 alerts
+                if (aiFeed.children.length > 4) {
+                    aiFeed.lastElementChild.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

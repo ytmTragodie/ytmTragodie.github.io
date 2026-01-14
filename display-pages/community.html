@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康社区 - 智能健康管理平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .community-grid {
+            display: grid;
+            grid-template-columns: 240px 1fr 280px;
+            gap: 24px;
+            padding: 30px 0;
+        }
+
+        /* Left Sidebar */
+        .topic-list li {
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+        }
+        .topic-list li:hover, .topic-list li.active {
+            background: white;
+            color: var(--primary);
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Middle Feed */
+        .post-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #eee;
+            object-fit: cover;
+        }
+        .post-images {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 15px 0;
+        }
+        .post-image {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f0f0f0;
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+        .action-btn {
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .action-btn:hover { color: var(--primary); }
+
+        /* Recruitment Card */
+        .recruit-card {
+            background: linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);
+            border: 1px solid #bbdefb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        /* Right Sidebar */
+        .health-card-mini {
+            background: var(--gradient-main);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 992px) {
+            .community-grid { grid-template-columns: 1fr; }
+            .left-sidebar, .right-sidebar { display: none; } /* Simplified mobile view */
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="header">
+        <div class="container nav-container">
+            <div class="logo">HealthCare+</div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="community.html" class="active">健康社区</a>
+                <a href="diet.html">膳食科普</a>
+                <a href="mall.html">严选商城</a>
+                <a href="monitor.html">智能监测</a>
+            </div>
+            <button class="btn btn-outline" onclick="window.location.href='profile.html'">个人中心</button>
+        </div>
+    </nav>
+
+    <div class="container community-grid">
+        
+        <!-- Left Sidebar: Topics -->
+        <aside class="left-sidebar">
+            <div class="card" style="position: sticky; top: 100px;">
+                <h3 style="font-size: 1.1rem; margin-bottom: 15px;">话题分类</h3>
+                <ul class="topic-list">
+                    <li class="active" data-topic="热门推荐">🔥 热门推荐</li>
+                    <li data-topic="每日打卡">📅 每日打卡</li>
+                    <li data-topic="饮食记录">🥗 饮食记录</li>
+                    <li data-topic="运动日记">🏃 运动日记</li>
+                    <li data-topic="慢病交流">💊 慢病交流</li>
+                    <li data-topic="养生问答">❓ 养生问答</li>
+                    <li data-topic="健康分享">💡 健康分享</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Middle Column: Feed -->
+        <main id="community-feed">
+            <!-- Recruitment Card -->
+            <div class="recruit-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                    <div>
+                        <span class="tag tag-blue mb-2">结伴招募</span>
+                        <h4>糖尿病控糖打卡小组 (第3期)</h4>
+                        <p style="font-size: 0.9rem; color: #666; margin: 5px 0 10px;">互相监督饮食，分享控糖食谱，每日打卡。</p>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="avatar" style="width: 24px; height: 24px;"></div>
+                            <span style="font-size: 0.85rem;">发起人: 糖小护</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="padding: 6px 16px; font-size: 0.9rem;">立即加入</button>
+                </div>
+                <div style="margin-top: 15px;">
+                    <div style="background: #e0e0e0; height: 6px; border-radius: 3px; overflow: hidden;">
+                        <div style="background: var(--primary); width: 80%; height: 100%;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 5px; color: #666;">
+                        <span>已加入 8人</span>
+                        <span>限额 10人</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 1 -->
+            <div class="post-card fade-in">
+                <div class="user-info">
+                    <div class="avatar"></div>
+                    <div>
+                        <h5 style="margin: 0;">健康达人李阿姨 <span class="tag tag-orange" style="transform: scale(0.8);">控糖先锋</span></h5>
+                        <small style="color: #999;">2小时前 · 发布于 饮食记录</small>
+                    </div>
+                </div>
+                <p>今天的午餐打卡！按照医生建议，多吃蔬菜少吃主食。芹菜炒豆干，清蒸鱼，还有一小碗杂粮饭。餐后血糖7.8，非常满意！💪 #糖尿病饮食 #控糖打卡</p>
+                <div class="post-images">
+                    <div class="post-image"></div>
+                    <div class="post-image"></div>
+                    <div class="post-image"></div>
+                </div>
+                <div class="post-actions">
+                    <div class="action-btn">❤️ 24</div>
+                    <div class="action-btn" onclick="toggleComments(this)">💬 评论</div>
+                    <div class="action-btn">⭐ 收藏</div>
+                    <div class="action-btn">🔗 分享</div>
+                </div>
+                <div class="comment-section" style="display: none; margin-top: 15px; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                    <div style="display:flex; gap:10px; margin-bottom:10px;">
+                        <input type="text" class="form-input" placeholder="写下你的评论..." style="padding: 8px;">
+                        <button class="btn btn-primary" style="padding: 8px 15px;">发送</button>
+                    </div>
+                    <div class="comment-list">
+                        <div style="border-bottom: 1px solid #eee; padding: 8px 0;">
+                            <span style="font-weight:bold; font-size:0.9rem;">小王:</span> <span style="font-size:0.9rem; color:#555;">真的很棒！</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="post-card fade-in" style="animation-delay: 0.1s;">
+                <div class="user-info">
+                    <div class="avatar"></div>
+                    <div>
+                        <h5 style="margin: 0;">王医生 <span class="tag tag-blue" style="transform: scale(0.8);">认证营养师</span></h5>
+                        <small style="color: #999;">5小时前 · 发布于 养生问答</small>
+                    </div>
+                </div>
+                <p>回答一下大家关于“无糖食品”的疑问。无糖不代表无热量！很多无糖饼干虽然没有蔗糖，但油脂含量很高，热量依然不低。建议大家看配料表和营养成分表。💡</p>
+                <div class="post-actions">
+                    <div class="action-btn">❤️ 156</div>
+                    <div class="action-btn" onclick="toggleComments(this)">💬 评论</div>
+                    <div class="action-btn">⭐ 收藏</div>
+                </div>
+                <div class="comment-section" style="display: none; margin-top: 15px; background: #f9f9f9; padding: 15px; border-radius: 8px;">
+                    <div style="display:flex; gap:10px; margin-bottom:10px;">
+                        <input type="text" class="form-input" placeholder="写下你的评论..." style="padding: 8px;">
+                        <button class="btn btn-primary" style="padding: 8px 15px;">发送</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <div class="health-card-mini">
+                <h4>我的今日健康</h4>
+                <div style="margin-top: 15px; display: flex; justify-content: space-between; text-align: center;">
+                    <div>
+                        <div style="font-size: 1.2rem; font-weight: bold;">6.5</div>
+                        <small style="opacity: 0.8;">血糖</small>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.2rem; font-weight: bold;">120/80</div>
+                        <small style="opacity: 0.8;">血压</small>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.2rem; font-weight: bold;">6500</div>
+                        <small style="opacity: 0.8;">步数</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4 style="font-size: 1rem; margin-bottom: 15px;">推荐关注</h4>
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                    <div class="avatar" style="width: 36px; height: 36px;"></div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 0.9rem; font-weight: 500;">张医师</div>
+                        <small style="color: #999;">内分泌科专家</small>
+                    </div>
+                    <button class="btn btn-outline" style="padding: 2px 10px; font-size: 0.8rem;">关注</button>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="avatar" style="width: 36px; height: 36px;"></div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 0.9rem; font-weight: 500;">营养师小林</div>
+                        <small style="color: #999;">专注慢病调理</small>
+                    </div>
+                    <button class="btn btn-outline" style="padding: 2px 10px; font-size: 0.8rem;">关注</button>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

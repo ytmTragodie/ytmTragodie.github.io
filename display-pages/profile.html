@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 智能健康管理平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .profile-header {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #999;
+        }
+
+        .level-badge {
+            background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .menu-list {
+            background: white;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .menu-item {
+            padding: 18px 25px;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .menu-item:hover {
+            background: #f9f9f9;
+        }
+        
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="header">
+        <div class="container nav-container">
+            <div class="logo">HealthCare+</div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="community.html">健康社区</a>
+                <a href="diet.html">膳食科普</a>
+                <a href="mall.html">严选商城</a>
+                <a href="monitor.html">智能监测</a>
+            </div>
+            <button class="btn btn-primary" onclick="window.location.href='profile.html'">个人中心</button>
+        </div>
+    </nav>
+
+    <div class="container section">
+        
+        <!-- Profile Header -->
+        <div class="profile-header fade-in">
+            <div class="profile-avatar">👤</div>
+            <div>
+                <h2 style="margin-bottom: 5px;">
+                    张大山 
+                    <span class="level-badge">Lv.3 控糖卫士</span>
+                </h2>
+                <p class="text-secondary">加入健康管理第 28 天</p>
+            </div>
+            <div style="margin-left: auto;">
+                <button class="btn btn-outline">编辑资料</button>
+            </div>
+        </div>
+
+        <!-- Health Stats -->
+        <h3 class="mb-4">我的健康数据</h3>
+        <div class="grid-4 mb-5 fade-in" style="animation-delay: 0.1s;">
+            <div class="stat-card">
+                <div class="stat-label">空腹血糖</div>
+                <div class="stat-value" style="color: #4CAF50;">6.1</div>
+                <small class="text-secondary">mmol/L (正常)</small>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">血压</div>
+                <div class="stat-value" style="color: #FF9800;">135/85</div>
+                <small class="text-secondary">mmHg (偏高)</small>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">BMI</div>
+                <div class="stat-value">24.2</div>
+                <small class="text-secondary">体重指数 (正常)</small>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">今日步数</div>
+                <div class="stat-value" style="color: #2196F3;">6,234</div>
+                <small class="text-secondary">步</small>
+            </div>
+        </div>
+
+        <!-- Function Menu -->
+        <div class="grid-2 fade-in" style="animation-delay: 0.2s;">
+            <div>
+                <h3 class="mb-4">常用功能</h3>
+                <div class="menu-list">
+                    <div class="menu-item" onclick="alert('功能开发中')">
+                        <span>📄 我的健康档案</span>
+                        <span class="text-secondary">›</span>
+                    </div>
+                    <div class="menu-item" onclick="window.location.href='diet.html'">
+                        <span>🥗 我的收藏食谱</span>
+                        <span class="text-secondary">›</span>
+                    </div>
+                    <div class="menu-item" onclick="window.location.href='mall.html'">
+                        <span>📦 商城订单</span>
+                        <span class="text-secondary">›</span>
+                    </div>
+                    <div class="menu-item" onclick="window.location.href='community.html'">
+                        <span>💬 我的帖子/回复</span>
+                        <span class="text-secondary">›</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="mb-4">系统设置</h3>
+                <div class="menu-list">
+                    <div class="menu-item">
+                        <span>🔔 消息通知</span>
+                        <label style="position: relative; display: inline-block; width: 40px; height: 20px;">
+                            <input type="checkbox" checked style="opacity: 0; width: 0; height: 0;">
+                            <span style="position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #2196F3; transition: .4s; border-radius: 20px;"></span>
+                            <span style="position: absolute; content: ''; height: 16px; width: 16px; left: 22px; bottom: 2px; background-color: white; transition: .4s; border-radius: 50%;"></span>
+                        </label>
+                    </div>
+                    <div class="menu-item" onclick="alert('已清除缓存')">
+                        <span>🧹 清除缓存</span>
+                        <span class="text-secondary">32 MB</span>
+                    </div>
+                    <div class="menu-item" onclick="alert('检查更新')">
+                        <span>ℹ️ 关于我们</span>
+                        <span class="text-secondary">v1.0.0</span>
+                    </div>
+                    <div class="menu-item" style="color: var(--danger);" onclick="confirm('确定要退出登录吗？')">
+                        <span>🚪 退出登录</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,82 +1,268 @@
-<!--生成一个简单的测试用网页-->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>测试网页</title>
-	<style>
-		body {
-			background-color: #e6ffe6;
-			font-family: Arial, sans-serif;
-			margin: 0;
-			padding: 0;
-		}
-		.container {
-			max-width: 800px;
-			margin: 40px auto;
-			background: #fff;
-			border-radius: 8px;
-			box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-			padding: 32px;
-		}
-		h1 {
-			color: #2e8b57;
-			text-align: center;
-		}
-		p {
-			font-size: 1.1em;
-			color: #333;
-		}
-		table {
-			width: 100%;
-			border-collapse: collapse;
-			margin-top: 24px;
-		}
-		th, td {
-			border: 1px solid #b2d8b2;
-			padding: 10px 16px;
-			text-align: center;
-		}
-		th {
-			background-color: #c3f7c3;
-			color: #226622;
-		}
-		tr:nth-child(even) {
-			background-color: #f4fff4;
-		}
-	</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能健康管理平台 - 首页</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e3f2fd 100%);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(33,150,243,0.1) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .assessment-container {
+            max-width: 800px;
+            margin: -50px auto 50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .step-content {
+            display: none;
+        }
+        
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .radar-chart-placeholder {
+            width: 100%;
+            height: 300px;
+            background: #f9f9f9;
+            border-radius: 50%;
+            position: relative;
+            margin: 20px auto;
+            border: 1px dashed #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+    </style>
 </head>
 <body>
-	<div class="container">
-		<h1>测试网页</h1>
-		<p>这是一个用于测试的简单网页，包含文字、表格等样式，背景为浅绿色。</p>
-		<table>
-			<thead>
-				<tr>
-					<th>编号</th>
-					<th>姓名</th>
-					<th>成绩</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>张三</td>
-					<td>90</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td>李四</td>
-					<td>85</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td>王五</td>
-					<td>88</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+
+    <!-- Navigation -->
+    <nav class="header">
+        <div class="container nav-container">
+            <div class="logo">HealthCare+</div>
+            <div class="nav-links">
+                <a href="index.html" class="active">首页</a>
+                <a href="community.html">健康社区</a>
+                <a href="diet.html">膳食科普</a>
+                <a href="mall.html">严选商城</a>
+                <a href="monitor.html">智能监测</a>
+            </div>
+            <button class="btn btn-outline" onclick="window.location.href='profile.html'">个人中心</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <h1>开启您的科学健康管理之旅</h1>
+            <p>为您量身定制从监测、评估到干预的闭环管理方案，让慢病管理更科学、更轻松</p>
+            <button class="btn btn-primary" onclick="startAssessment()">开始我的个性化管理评估</button>
+        </div>
+    </section>
+
+    <!-- Assessment Flow (Dynamic) -->
+    <section class="container assessment-container">
+        
+        <!-- Step 1: Register/Login Simulation -->
+        <div id="step-1" class="card step-content">
+            <h2 class="text-center mb-4">欢迎加入</h2>
+            <p class="text-center text-secondary mb-4">只需一步，开始您的健康档案</p>
+            <form onsubmit="event.preventDefault(); nextStep(2);">
+                <div class="form-group">
+                    <label class="form-label">手机号码</label>
+                    <input type="tel" class="form-input" placeholder="请输入手机号" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">验证码</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" class="form-input" placeholder="1234" style="flex:1;">
+                        <button type="button" class="btn btn-outline">获取验证码</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">下一步</button>
+            </form>
+        </div>
+
+        <!-- Step 2: Health Info Collection -->
+        <div id="step-2" class="card step-content">
+            <h2>您的身体情况</h2>
+            <p class="text-secondary mb-4">这些信息将帮助我们为您生成更有针对性的初步分析和建议。</p>
+            <form onsubmit="event.preventDefault(); nextStep(3);">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">年龄</label>
+                        <input type="number" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">性别</label>
+                        <select class="form-select">
+                            <option>男</option>
+                            <option>女</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">身高 (cm)</label>
+                        <input type="number" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">体重 (kg)</label>
+                        <input type="number" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">核心病种 (多选)</label>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <label><input type="checkbox"> 高血压</label>
+                        <label><input type="checkbox"> 2型糖尿病</label>
+                        <label><input type="checkbox"> 血脂异常</label>
+                        <label><input type="checkbox"> 骨质疏松</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">近期空腹血糖 (mmol/L)</label>
+                    <input type="range" min="3" max="20" step="0.1" class="form-input" oninput="this.nextElementSibling.value = this.value">
+                    <output>9.2</output>
+                    <small class="text-secondary" style="display:block; margin-top:5px;">如果记不清可大致估算或跳过</small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">当前最困扰的问题</label>
+                    <select class="form-select">
+                        <option>血糖波动大</option>
+                        <option>不知道吃什么</option>
+                        <option>用药副作用</option>
+                        <option>缺乏运动动力</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">生成评估报告</button>
+            </form>
+        </div>
+
+        <!-- Step 3: Report & Recommendations -->
+        <div id="step-3" class="card step-content">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h2 style="color: var(--primary);">健康评估报告</h2>
+                <p>生成时间: <span id="current-date">2026-01-14</span></p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3>情况总结</h3>
+                    <p class="mb-4" style="background: #E3F2FD; padding: 15px; border-radius: 8px;">
+                        根据您的信息，您目前正处于<strong>2型糖尿病的中期管理阶段</strong>。空腹血糖值 <strong>9.2mmol/L</strong> 表明您的血糖控制有较大优化空间（一般理想目标为空腹血糖4.4-7.0mmol/L）。
+                    </p>
+                    
+                    <h3>核心发现与风险</h3>
+                    <ul style="list-style: disc; padding-left: 20px; color: var(--text-secondary);">
+                        <li class="mb-2"><strong>波动性关注：</strong>“血糖波动大”是需警惕的信号，长期会增加心血管并发症风险。</li>
+                        <li class="mb-2"><strong>饮食困惑：</strong>建议加强对食物升糖指数（GI）的了解。</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="radar-chart-placeholder">
+                        [健康风险雷达图]
+                        <br>血糖控制: 低
+                        <br>饮食习惯: 中
+                        <br>运动频率: 弱
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <h3>您的即时行动建议</h3>
+                <div class="grid-2">
+                    <div class="card" style="background: #f9f9f9; border-left: 4px solid var(--primary);">
+                        <h4>优先行动1 - 监测</h4>
+                        <p>建议您立即开始记录餐后2小时血糖。仅看空腹血糖无法全面评估控制情况。</p>
+                    </div>
+                    <div class="card" style="background: #f9f9f9; border-left: 4px solid var(--success);">
+                        <h4>优先行动2 - 饮食</h4>
+                        <p>尝试“盘子法则”：一半放非淀粉类蔬菜，四分之一放优质蛋白，四分之一放全谷物主食。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; text-align: center;">
+                <h3>解锁完整管理方案</h3>
+                <p class="mb-4">根据您的评估，为您推荐以下板块：</p>
+                <div class="grid-3">
+                    <a href="community.html" class="card" style="text-align: center; display: block; text-decoration: none;">
+                        <div style="font-size: 3rem; color: var(--primary); margin-bottom: 10px;">👥</div>
+                        <h4>健康社区</h4>
+                        <p style="font-size: 0.9rem; color: #666;">加入控糖打卡圈子</p>
+                    </a>
+                    <a href="diet.html" class="card" style="text-align: center; display: block; text-decoration: none;">
+                        <div style="font-size: 3rem; color: var(--success); margin-bottom: 10px;">🥗</div>
+                        <h4>膳食科普</h4>
+                        <p style="font-size: 0.9rem; color: #666;">获取降糖食谱</p>
+                    </a>
+                    <a href="mall.html" class="card" style="text-align: center; display: block; text-decoration: none;">
+                        <div style="font-size: 3rem; color: var(--secondary); margin-bottom: 10px;">🛍️</div>
+                        <h4>严选商城</h4>
+                        <p style="font-size: 0.9rem; color: #666;">购买无糖食品</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        // Inline script for page-specific logic or keep it simple here
+        function startAssessment() {
+            document.getElementById('hero').style.display = 'none';
+            document.getElementById('step-1').classList.add('active');
+        }
+
+        function nextStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            // Show target step
+            document.getElementById('step-' + step).classList.add('active');
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
 </body>
 </html>

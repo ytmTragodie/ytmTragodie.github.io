@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>膳食科普 - 智能健康管理平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .filter-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: white;
+            border: 1px solid #eee;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .recipe-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .recipe-img {
+            height: 180px;
+            background: #eee;
+            border-radius: var(--radius-md);
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .recipe-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .article-item {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        
+        .article-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .article-img {
+            width: 120px;
+            height: 90px;
+            background: #eee;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="header">
+        <div class="container nav-container">
+            <div class="logo">HealthCare+</div>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="community.html">健康社区</a>
+                <a href="diet.html" class="active">膳食科普</a>
+                <a href="mall.html">严选商城</a>
+                <a href="monitor.html">智能监测</a>
+            </div>
+            <button class="btn btn-outline" onclick="window.location.href='profile.html'">个人中心</button>
+        </div>
+    </nav>
+
+    <div class="container section">
+        
+        <div class="text-center mb-5" style="margin-bottom: 40px;">
+            <h2>药食同源 · 科学膳食</h2>
+            <p class="text-secondary">针对慢病人群的定制化营养方案</p>
+        </div>
+
+        <!-- Recipe Section -->
+        <h3 class="mb-4">今日推荐食谱</h3>
+        
+        <div class="filter-bar" style="position: relative;">
+            <div class="nav-slider"></div>
+            <button class="filter-btn active" data-filter="all">全部</button>
+            <button class="filter-btn" data-filter="高血压">高血压</button>
+            <button class="filter-btn" data-filter="糖尿病">糖尿病</button>
+            <button class="filter-btn" data-filter="高血脂">高血脂</button>
+            <button class="filter-btn" data-filter="早餐">早餐</button>
+            <button class="filter-btn" data-filter="午餐">午餐</button>
+            <button class="filter-btn" data-filter="晚餐">晚餐</button>
+        </div>
+
+        <div id="recipe-container" class="grid-3 mb-5" style="margin-bottom: 60px; transition: transform 0.3s, opacity 0.3s;">
+            <!-- Recipe 1 -->
+            <div class="card recipe-card fade-in">
+                <div class="recipe-img">
+                    <span class="recipe-tag">早餐 • 降压</span>
+                </div>
+                <h4>山楂决明子小米粥</h4>
+                <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 10px;">食材：小米、山楂片、决明子、去核红枣</p>
+                <div style="margin-top: auto;">
+                    <p style="font-size: 0.85rem; background: #f0f4f8; padding: 8px; border-radius: 6px; margin-bottom: 15px;">
+                        <span style="color: var(--primary);">【严选食材】</span> 
+                        <a href="mall.html" style="text-decoration: underline;">严选山楂片</a> / <a href="mall.html" style="text-decoration: underline;">决明子</a>
+                    </p>
+                    <button class="btn btn-outline" style="width: 100%; border-radius: 8px; padding: 8px;">查看做法</button>
+                </div>
+            </div>
+
+            <!-- Recipe 2 -->
+            <div class="card recipe-card fade-in" style="animation-delay: 0.1s;">
+                <div class="recipe-img">
+                    <span class="recipe-tag">午餐 • 降糖</span>
+                </div>
+                <h4>天麻蒸鱼块</h4>
+                <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 10px;">食材：鲈鱼块、天麻片、姜丝、葱丝</p>
+                <div style="margin-top: auto;">
+                    <p style="font-size: 0.85rem; background: #f0f4f8; padding: 8px; border-radius: 6px; margin-bottom: 15px;">
+                        <span style="color: var(--primary);">【严选食材】</span> 
+                        <a href="mall.html" style="text-decoration: underline;">野生天麻片</a>
+                    </p>
+                    <button class="btn btn-outline" style="width: 100%; border-radius: 8px; padding: 8px;">查看做法</button>
+                </div>
+            </div>
+
+            <!-- Recipe 3 -->
+            <div class="card recipe-card fade-in" style="animation-delay: 0.2s;">
+                <div class="recipe-img">
+                    <span class="recipe-tag">晚餐 • 养心</span>
+                </div>
+                <h4>茯苓莲子蒸鸭肉</h4>
+                <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 10px;">食材：鸭胸肉、茯苓片、去心白莲子</p>
+                <div style="margin-top: auto;">
+                    <p style="font-size: 0.85rem; background: #f0f4f8; padding: 8px; border-radius: 6px; margin-bottom: 15px;">
+                        <span style="color: var(--primary);">【严选食材】</span> 
+                        <a href="mall.html" style="text-decoration: underline;">茯苓片</a> / <a href="mall.html" style="text-decoration: underline;">白莲子</a>
+                    </p>
+                    <button class="btn btn-outline" style="width: 100%; border-radius: 8px; padding: 8px;">查看做法</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Knowledge Section -->
+        <div class="grid-2">
+            <div>
+                <h3 class="mb-4">专家科普</h3>
+                <div class="article-item">
+                    <div class="article-img"></div>
+                    <div>
+                        <h4 style="font-size: 1.1rem;">别只吃药了！这5种“天然降压药”就藏在你家厨房</h4>
+                        <p class="text-secondary" style="font-size: 0.9rem; margin-top: 5px;">高血压患者必看，芹菜、洋葱...</p>
+                    </div>
+                </div>
+                <div class="article-item">
+                    <div class="article-img"></div>
+                    <div>
+                        <h4 style="font-size: 1.1rem;">稳住血压值，三分靠药，七分靠吃！你吃对了吗？</h4>
+                        <p class="text-secondary" style="font-size: 0.9rem; margin-top: 5px;">科学配餐指南，守护全天血压平稳。</p>
+                    </div>
+                </div>
+                <div class="article-item">
+                    <div class="article-img"></div>
+                    <div>
+                        <h4 style="font-size: 1.1rem;">双重管理：糖尿病合并高血压的科学饮食指南</h4>
+                        <p class="text-secondary" style="font-size: 0.9rem; margin-top: 5px;">针对多重慢病患者的综合疗养方案。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="mb-4">综合疗养</h3>
+                <div class="card" style="background: linear-gradient(135deg, #FFF8E1 0%, #FFFFFF 100%); border-color: #FFECB3;">
+                    <h4 style="color: #F57C00;">👵 老年慢病共存专区</h4>
+                    <p style="margin: 10px 0;">针对“高血压+糖尿病”、“骨质疏松+动脉硬化”等复杂情况的定制建议。</p>
+                    <ul style="list-style: none; margin-bottom: 20px;">
+                        <li style="margin-bottom: 8px;">✅ <strong>骨强脉顺：</strong>钙与脂的平衡艺术</li>
+                        <li style="margin-bottom: 8px;">✅ <strong>护骨通脉：</strong>综合养护指南</li>
+                    </ul>
+                    <button class="btn" style="background: #F57C00; color: white;">获取定制方案</button>
+                </div>
+
+                <div class="card mt-4" style="background: var(--bg-body);">
+                    <h4>🧮 快速食物计算器</h4>
+                    <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">输入食材看看是否超标</p>
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="输入食材名称 (如: 红烧肉)">
+                    </div>
+                    <button class="btn btn-primary" onclick="window.location.href='mall.html#calculator'">去计算</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
