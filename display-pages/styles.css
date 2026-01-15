@@ -253,7 +253,6 @@ h3 { font-size: 1.5rem; }
     background: var(--primary);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 2px;
-    /* Removed display: none to allow JS to control it */
 }
 
 /* Slide Animations for Content Switching */
@@ -273,4 +272,37 @@ h3 { font-size: 1.5rem; }
 
 .slide-in {
     animation: slideInRight 0.3s ease-out forwards;
+}
+
+/* Calculator Slide Animation */
+.calculator-panel {
+    position: fixed;
+    top: 0;
+    right: -400px; /* Hidden initially */
+    width: 350px;
+    height: 100vh;
+    background: white;
+    z-index: 2000;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator-panel.active {
+    right: 0;
+}
+
+.calculator-header {
+    background: var(--gradient-main);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calculator-body {
+    padding: 25px;
+    flex: 1;
+    overflow-y: auto;
 }
