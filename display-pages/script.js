@@ -107,22 +107,25 @@ function initMall() {
 // ... (Product Data remains same) ...
 const productData = {
     'pressure': [
-        { name: '严选芹菜粉', desc: '天然降压食材', price: '25.0', tag: '降压' },
-        { name: '罗布麻茶', desc: '平稳血压良伴', price: '45.0', tag: '降压' },
-        { name: '低钠海盐', desc: '减少钠摄入', price: '12.0', tag: '低钠' }
+        { name: '严选芹菜粉', desc: '天然降压食材', price: '25.0', tag: '降压', img: '严选芹菜粉.webp' },
+        { name: '罗布麻茶', desc: '平稳血压良伴', price: '45.0', tag: '降压', img: '罗布麻茶.webp' },
+        { name: '低钠海盐', desc: '减少钠摄入', price: '12.0', tag: '低钠', img: '低钠海盐.webp' },
+        { name: '严选山楂片', desc: '无糖添加，药食同源', price: '29.9', tag: '降压', img: '严选山楂片.jpg' },
+        { name: '特级决明子', desc: '颗粒饱满，清肝明目', price: '19.9', tag: '降压', img: '特级决明子.webp' },
+        { name: '野生天麻片', desc: '平抑肝阳，祛风通络', price: '88.0', tag: '降压', img: '野生天麻片.webp' }
     ],
     'sugar': [
-        { name: '低脂燕麦片', desc: '高纤维控糖', price: '35.0', tag: '控糖' },
-        { name: '苦荞茶', desc: '辅助降糖', price: '28.0', tag: '控糖' },
-        { name: '无糖全麦面包', desc: '早餐优选', price: '18.0', tag: '控糖' }
+        { name: '低脂燕麦片', desc: '高纤维控糖', price: '35.0', tag: '控糖', img: '低脂燕麦片.png' },
+        { name: '苦荞茶', desc: '辅助降糖', price: '28.0', tag: '控糖', img: '苦荞茶.png' },
+        { name: '无糖全麦面包', desc: '早餐优选', price: '18.0', tag: '控糖', img: '无糖全麦面包.png' }
     ],
     'salt': [
-        { name: '低钠酱油', desc: '减盐不减鲜', price: '15.0', tag: '低钠' },
-        { name: '无盐虾皮', desc: '天然钙源', price: '22.0', tag: '补钙' }
+        { name: '低钠酱油', desc: '减盐不减鲜', price: '15.0', tag: '低钠', img: '低钠酱油.jpeg' },
+        { name: '无盐虾皮', desc: '天然钙源', price: '22.0', tag: '补钙', img: '' }
     ],
     'nutrition': [
-        { name: '乳清蛋白粉', desc: '增强免疫力', price: '128.0', tag: '增肌' },
-        { name: '复合维生素', desc: '每日营养补充', price: '59.0', tag: '综合' }
+        { name: '乳清蛋白粉', desc: '增强免疫力', price: '128.0', tag: '增肌', img: '' },
+        { name: '复合维生素', desc: '每日营养补充', price: '59.0', tag: '综合', img: '' }
     ]
 };
 
@@ -141,10 +144,17 @@ function renderProducts(cat) {
         grid.innerHTML = '';
         const items = productData[cat] || productData['all'];
         items.forEach(item => {
+            let imgHtml = '';
+            if (item.img) {
+                imgHtml = `<img src="${item.img}" alt="${item.name}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            } else {
+                imgHtml = `<div style="width: 100%; height: 100%; background: #eee; display: flex; align-items: center; justify-content: center; color: #999;">暂无图片</div>`;
+            }
+
             const html = `
                 <div class="product-card fade-in">
                     <div class="product-img">
-                        <span style="color: #ccc;">${item.name}图</span>
+                        ${imgHtml}
                     </div>
                     <div class="product-info">
                         <h4>${item.name}</h4>
@@ -329,26 +339,26 @@ function startRealtimeUpdates(config) {
 // =======================
 // (Copying previous diet logic to ensure it's not lost)
 const recipesData = [
-    { title: '山楂决明子小米粥', tags: ['高血压', '早餐', '降压'], imgTag: '早餐 • 降压', desc: '食材：小米、山楂片、决明子、去核红枣。消食化积，辅助降压。' },
-    { title: '黄芪红枣小米粥', tags: ['高血压', '早餐', '补气'], imgTag: '早餐 • 补气', desc: '食材：小米、大米、黄芪片、去核红枣、桂圆干。益气补血，增强体质。' },
-    { title: '茯苓芝麻糊', tags: ['高血压', '早餐', '养发'], imgTag: '早餐 • 养发', desc: '食材：无糖黑芝麻糊粉、茯苓粉、即食燕麦片。健脾祛湿，乌发养颜。' },
-    { title: '葛根香蕉奶昔', tags: ['高血压', '早餐', '通络'], imgTag: '早餐 • 通络', desc: '食材：香蕉、葛根粉、低脂牛奶、燕麦片。生津止渴，升阳止泻。' },
-    { title: '天麻蒸鱼块', tags: ['高血压', '午餐', '平肝'], imgTag: '午餐 • 平肝', desc: '食材：鲈鱼块、天麻片、姜丝、葱丝。平抑肝阳，祛风通络。' },
-    { title: '清炒西芹百合', tags: ['高血压', '午餐', '清热'], imgTag: '午餐 • 清热', desc: '食材：西芹、鲜百合。清热除烦，平肝降压。' },
-    { title: '葛根玉米排骨汤', tags: ['高血压', '午餐', '滋阴'], imgTag: '午餐 • 滋阴', desc: '食材：猪排骨、甜玉米、葛根、胡萝卜。清热生津，滋阴补肾。' },
-    { title: '黄芪山药蒸鸡腿', tags: ['高血压', '午餐', '补气'], imgTag: '午餐 • 补气', desc: '食材：鸡腿根、铁棍山药、黄芪片、姜丝。补气益肺，健脾固肾。' },
-    { title: '茯苓莲子蒸鸭肉', tags: ['高血压', '晚餐', '安神'], imgTag: '晚餐 • 安神', desc: '食材：鸭胸肉、茯苓片、去心白莲子。健脾宁心，利水渗湿。' },
-    { title: '山药茯苓馒头', tags: ['高血压', '晚餐', '健脾'], imgTag: '晚餐 • 健脾', desc: '食材：面粉、山药粉、茯苓粉、酵母。健脾益胃，增强免疫。' },
-    { title: '枸杞香菇烧豆腐', tags: ['高血压', '晚餐', '养肝'], imgTag: '晚餐 • 养肝', desc: '食材：北豆腐、鲜香菇、枸杞、毛豆仁。滋补肝肾，益精明目。' },
-    { title: '百合山药小米粥', tags: ['高血压', '晚餐', '助眠'], imgTag: '晚餐 • 助眠', desc: '食材：小米、鲜百合、铁棍山药、枸杞。养阴润肺，清心安神。' },
-    { title: '苦瓜炒蛋', tags: ['糖尿病', '午餐', '降糖'], imgTag: '午餐 • 降糖', desc: '食材：苦瓜、鸡蛋、少许盐。苦瓜皂苷辅助降糖，鸡蛋补充优质蛋白。' },
-    { title: '杂粮饭', tags: ['糖尿病', '午餐', '低升糖'], imgTag: '午餐 • 低升糖', desc: '食材：糙米、黑米、红豆。富含膳食纤维，延缓血糖上升。' },
-    { title: '清蒸鲈鱼', tags: ['糖尿病', '晚餐', '优质蛋白'], imgTag: '晚餐 • 控糖', desc: '食材：鲈鱼、姜葱。低脂高蛋白，适合糖友食用。' },
-    { title: '西蓝花炒虾仁', tags: ['糖尿病', '午餐', '低卡'], imgTag: '午餐 • 低卡', desc: '食材：西蓝花、虾仁、蒜末。低热量高营养，饱腹感强。' },
-    { title: '清蒸茄子', tags: ['高血脂', '晚餐', '吸脂'], imgTag: '晚餐 • 吸脂', desc: '食材：茄子、蒜末、生抽。茄子富含维生素P，增强血管弹性。' },
-    { title: '燕麦核桃粥', tags: ['高血脂', '早餐', '降脂'], imgTag: '早餐 • 降脂', desc: '食材：燕麦片、核桃仁。燕麦β-葡聚糖有助于降低胆固醇。' },
-    { title: '海带豆腐汤', tags: ['高血脂', '午餐', '清血管'], imgTag: '午餐 • 清血管', desc: '食材：海带、豆腐。海带胶质吸附血管垃圾，豆腐补充大豆异黄酮。' },
-    { title: '凉拌木耳', tags: ['高血脂', '晚餐', '清肠'], imgTag: '晚餐 • 清肠', desc: '食材：黑木耳、醋、蒜泥。木耳多糖抗凝血，预防血栓。' }
+    { title: '山楂决明子小米粥', tags: ['高血压', '早餐', '降压'], imgTag: '早餐 • 降压', img: '山楂决明子小米粥.png', desc: '食材：小米、山楂片、决明子、去核红枣。消食化积，辅助降压。' },
+    { title: '黄芪红枣小米粥', tags: ['高血压', '早餐', '补气'], imgTag: '早餐 • 补气', img: '黄芪红枣小米粥.webp', desc: '食材：小米、大米、黄芪片、去核红枣、桂圆干。益气补血，增强体质。' },
+    { title: '茯苓芝麻糊', tags: ['高血压', '早餐', '养发'], imgTag: '早餐 • 养发', img: '茯苓芝麻糊.jpg', desc: '食材：无糖黑芝麻糊粉、茯苓粉、即食燕麦片。健脾祛湿，乌发养颜。' },
+    { title: '葛根香蕉奶昔', tags: ['高血压', '早餐', '通络'], imgTag: '早餐 • 通络', img: '葛根香蕉奶昔.jpg', desc: '食材：香蕉、葛根粉、低脂牛奶、燕麦片。生津止渴，升阳止泻。' },
+    { title: '天麻蒸鱼块', tags: ['高血压', '午餐', '平肝'], imgTag: '午餐 • 平肝', img: '天麻蒸鱼块.webp', desc: '食材：鲈鱼块、天麻片、姜丝、葱丝。平抑肝阳，祛风通络。' },
+    { title: '清炒西芹百合', tags: ['高血压', '午餐', '清热'], imgTag: '午餐 • 清热', img: '清炒西芹百合.webp', desc: '食材：西芹、鲜百合。清热除烦，平肝降压。' },
+    { title: '葛根玉米排骨汤', tags: ['高血压', '午餐', '滋阴'], imgTag: '午餐 • 滋阴', img: '葛根玉米排骨汤.png', desc: '食材：猪排骨、甜玉米、葛根、胡萝卜。清热生津，滋阴补肾。' },
+    { title: '黄芪山药蒸鸡腿', tags: ['高血压', '午餐', '补气'], imgTag: '午餐 • 补气', img: '黄芪山药蒸鸡腿.webp', desc: '食材：鸡腿根、铁棍山药、黄芪片、姜丝。补气益肺，健脾固肾。' },
+    { title: '茯苓莲子蒸鸭肉', tags: ['高血压', '晚餐', '安神'], imgTag: '晚餐 • 安神', img: '茯苓莲子蒸鸭肉.webp', desc: '食材：鸭胸肉、茯苓片、去心白莲子。健脾宁心，利水渗湿。' },
+    { title: '山药茯苓馒头', tags: ['高血压', '晚餐', '健脾'], imgTag: '晚餐 • 健脾', img: '杂粮饭.png', desc: '食材：面粉、山药粉、茯苓粉、酵母。健脾益胃，增强免疫。' },
+    { title: '枸杞香菇烧豆腐', tags: ['高血压', '晚餐', '养肝'], imgTag: '晚餐 • 养肝', img: '芹菜炒豆干.webp', desc: '食材：北豆腐、鲜香菇、枸杞、毛豆仁。滋补肝肾，益精明目。' },
+    { title: '百合山药小米粥', tags: ['高血压', '晚餐', '助眠'], imgTag: '晚餐 • 助眠', img: '黄芪红枣小米粥.webp', desc: '食材：小米、鲜百合、铁棍山药、枸杞。养阴润肺，清心安神。' },
+    { title: '苦瓜炒蛋', tags: ['糖尿病', '午餐', '降糖'], imgTag: '午餐 • 降糖', img: '清炒西芹百合.webp', desc: '食材：苦瓜、鸡蛋、少许盐。苦瓜皂苷辅助降糖，鸡蛋补充优质蛋白。' },
+    { title: '杂粮饭', tags: ['糖尿病', '午餐', '低升糖'], imgTag: '午餐 • 低升糖', img: '杂粮饭.png', desc: '食材：糙米、黑米、红豆。富含膳食纤维，延缓血糖上升。' },
+    { title: '清蒸鲈鱼', tags: ['糖尿病', '晚餐', '优质蛋白'], imgTag: '晚餐 • 控糖', img: '清蒸鱼.png', desc: '食材：鲈鱼、姜葱。低脂高蛋白，适合糖友食用。' },
+    { title: '西蓝花炒虾仁', tags: ['糖尿病', '午餐', '低卡'], imgTag: '午餐 • 低卡', img: '芹菜炒豆干.webp', desc: '食材：西蓝花、虾仁、蒜末。低热量高营养，饱腹感强。' },
+    { title: '清蒸茄子', tags: ['高血脂', '晚餐', '吸脂'], imgTag: '晚餐 • 吸脂', img: '天麻蒸鱼块.webp', desc: '食材：茄子、蒜末、生抽。茄子富含维生素P，增强血管弹性。' },
+    { title: '燕麦核桃粥', tags: ['高血脂', '早餐', '降脂'], imgTag: '早餐 • 降脂', img: '低脂燕麦片.png', desc: '食材：燕麦片、核桃仁。燕麦β-葡聚糖有助于降低胆固醇。' },
+    { title: '海带豆腐汤', tags: ['高血脂', '午餐', '清血管'], imgTag: '午餐 • 清血管', img: '葛根玉米排骨汤.png', desc: '食材：海带、豆腐。海带胶质吸附血管垃圾，豆腐补充大豆异黄酮。' },
+    { title: '凉拌木耳', tags: ['高血脂', '晚餐', '清肠'], imgTag: '晚餐 • 清肠', img: '清炒西芹百合.webp', desc: '食材：黑木耳、醋、蒜泥。木耳多糖抗凝血，预防血栓。' }
 ];
 
 function initDiet() {
@@ -394,7 +404,10 @@ function renderRecipes(filter) {
     filtered.forEach(item => {
         const html = `
             <div class="card recipe-card fade-in">
-                <div class="recipe-img"><span class="recipe-tag">${item.imgTag}</span></div>
+                <div class="recipe-img">
+                    <img src="${item.img}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+                    <span class="recipe-tag">${item.imgTag}</span>
+                </div>
                 <h4>${item.title}</h4>
                 <p class="text-secondary" style="font-size: 0.9rem; margin-bottom: 10px;">${item.desc}</p>
                 <div style="margin-top: auto;">
@@ -449,34 +462,44 @@ function loadFeed(topicName) {
     } else if (topicName.includes('养生问答')) {
         content = `${createPost('王医生', '【科普】为什么不建议糖尿病人吃稀饭？升糖指数（GI）是关键...', 120, true)}${createPost('小刘', '请问高血压能不能吃人参？', 12)}`;
     } else if (topicName.includes('饮食记录')) {
-        content = `${createPost('美食家小陈', '今天的午餐：藜麦饭 + 鸡胸肉 + 西兰花。', 45)}${createPost('糖友老赵', '发现一个超好吃的无糖酸奶！', 33)}${createPost('小美', '自制无糖蛋糕，做法分享~', 89)}`;
+        content = `${createPost('美食家小陈', '今天的午餐：藜麦饭 + 鸡胸肉 + 西兰花。', 45, false, ['杂粮饭.png', '清炒西芹百合.webp'])}${createPost('糖友老赵', '发现一个超好吃的无糖酸奶！', 33, false, ['葛根香蕉奶昔.jpg'])}${createPost('小美', '自制无糖蛋糕，做法分享~', 89, false, ['茯苓芝麻糊.jpg'])}`;
     } else if (topicName.includes('运动日记')) {
         content = `${createPost('跑者小李', '晨跑5公里，配速5:30。', 88)}${createPost('健身达人', '力量训练日，深蹲100kg达成！', 102)}${createPost('瑜伽爱好者', '今日瑜伽打卡，身心舒畅。', 45)}`;
     } else if (topicName.includes('慢病交流')) {
-        content = `${createPost('康复之路', '确诊高血压3年，分享我的控压经验。', 210)}${createPost('温暖的心', '有人吃过二甲双胍缓释片吗？有什么副作用？', 15)}${createPost('老张', '最近血压波动大，医生建议我减肥。', 22)}`;
+        content = `${createPost('康复之路', '确诊高血压3年，分享我的控压经验。', 210, false, ['严选芹菜粉.webp'])}${createPost('温暖的心', '有人吃过二甲双胍缓释片吗？有什么副作用？', 15)}${createPost('老张', '最近血压波动大，医生建议我减肥。', 22)}`;
     } else if (topicName.includes('健康分享')) {
-        content = `${createPost('小编推荐', '这5种水果升糖指数最低，建议收藏！', 500, true)}${createPost('养生达人', '睡前泡脚的好处，坚持一个月效果惊人。', 340)}`;
+        content = `${createPost('小编推荐', '这5种水果升糖指数最低，建议收藏！', 500, true, ['低脂燕麦片.png'])}${createPost('养生达人', '睡前泡脚的好处，坚持一个月效果惊人。', 340)}`;
     } else {
         content = `
             <div class="recruit-card fade-in">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                    <div><span class="tag tag-blue mb-2">结伴招募</span><h4>糖尿病控糖打卡小组 (第3期)</h4><p style="font-size: 0.9rem; color: #666; margin: 5px 0 10px;">互相监督饮食，分享控糖食谱，每日打卡。</p><div style="display: flex; align-items: center; gap: 10px;"><div class="avatar" style="width: 24px; height: 24px;"></div><span style="font-size: 0.85rem;">发起人: 糖小护</span></div></div>
+                    <div><span class="tag tag-blue mb-2">结伴招募</span><h4>糖尿病控糖打卡小组 (第3期)</h4><p style="font-size: 0.9rem; color: #666; margin: 5px 0 10px;">互相监督饮食，分享控糖食谱，每日打卡。</p><div style="display: flex; align-items: center; gap: 10px;"><img class="avatar" src="杂粮饭.png" style="width: 24px; height: 24px; object-fit: cover;"><span style="font-size: 0.85rem;">发起人: 糖小护</span></div></div>
                     <button class="btn btn-primary" style="padding: 6px 16px; font-size: 0.9rem;">立即加入</button>
                 </div>
             </div>
-            ${createPost('健康达人李阿姨', '今天的午餐打卡！芹菜炒豆干，清蒸鱼... #控糖', 24)}
-            ${createPost('王医生', '无糖不代表无热量！大家要注意看配料表。', 156, true)}
+            ${createPost('健康达人李阿姨', '今天的午餐打卡！芹菜炒豆干，清蒸鱼... #控糖', 24, false, ['芹菜炒豆干.webp', '清蒸鱼.png', '杂粮饭.png'])}
+            ${createPost('王医生', '无糖不代表无热量！大家要注意看配料表。', 156, true, ['无糖全麦面包.png', '低脂燕麦片.png', '苦荞茶.png'])}
         `;
     }
     feed.innerHTML = content;
 }
 
-function createPost(user, text, likes, isExpert=false) {
+function createPost(user, text, likes, isExpert=false, images=[]) {
     const badge = isExpert ? '<span class="tag tag-blue" style="transform: scale(0.8);">认证专家</span>' : '';
+    let imagesHtml = '';
+    if (images && images.length > 0) {
+        imagesHtml = '<div class="post-images">';
+        images.forEach(img => {
+            imagesHtml += `<img class="post-image" src="${img}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px; background: #f0f0f0;">`;
+        });
+        imagesHtml += '</div>';
+    }
+
     return `
         <div class="post-card fade-in">
-            <div class="user-info"><div class="avatar"></div><div><h5 style="margin: 0;">${user} ${badge}</h5><small style="color: #999;">刚刚发布</small></div></div>
+            <div class="user-info"><img class="avatar" src="王医生.png" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;"><div><h5 style="margin: 0;">${user} ${badge}</h5><small style="color: #999;">刚刚发布</small></div></div>
             <p>${text}</p>
+            ${imagesHtml}
             <div class="post-actions"><div class="action-btn">❤️ ${likes}</div><div class="action-btn" onclick="toggleComments(this)">💬 评论</div><div class="action-btn">⭐ 收藏</div></div>
             <div class="comment-section" style="display: none; margin-top: 15px; background: #f9f9f9; padding: 15px; border-radius: 8px;">
                 <div style="display:flex; gap:10px; margin-bottom:10px;"><input type="text" class="form-input" placeholder="写下你的评论..." style="padding: 8px;"><button class="btn btn-primary" style="padding: 8px 15px;">发送</button></div>
