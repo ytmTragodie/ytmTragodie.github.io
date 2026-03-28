@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>SpringBoot 医疗社区前后端项目记录 | ytmTragodie</title><meta name="author" content="ytmTragodie"><meta name="copyright" content="ytmTragodie"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="项目与部署记录 环境配置工具下载   工具名称 项目使用版本    git    java 21   maven 4.0.0   docker(不必须)    项目创建与配置   Extension Name Usage    Extension Pack For Java VSCode JAVA支持   Spring Initializr Java Support 快速生成Spring Boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot 医疗社区前后端项目记录">
+<meta property="og:url" content="https://ytmtragodie.github.io/2026/03/25/SpringBoot-%E5%8C%BB%E7%96%97%E7%A4%BE%E5%8C%BA%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="ytmTragodie">
+<meta property="og:description" content="项目与部署记录 环境配置工具下载   工具名称 项目使用版本    git    java 21   maven 4.0.0   docker(不必须)    项目创建与配置   Extension Name Usage    Extension Pack For Java VSCode JAVA支持   Spring Initializr Java Support 快速生成Spring Boot">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ytmtragodie.github.io/img/thebends.png">
+<meta property="article:published_time" content="2026-03-25T15:47:03.000Z">
+<meta property="article:modified_time" content="2026-03-25T15:49:59.017Z">
+<meta property="article:author" content="ytmTragodie">
+<meta property="article:tag" content="笔记">
+<meta property="article:tag" content="JAVA">
+<meta property="article:tag" content="前后端">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ytmtragodie.github.io/img/thebends.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SpringBoot 医疗社区前后端项目记录",
+  "url": "https://ytmtragodie.github.io/2026/03/25/SpringBoot-%E5%8C%BB%E7%96%97%E7%A4%BE%E5%8C%BA%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/",
+  "image": "https://ytmtragodie.github.io/img/thebends.png",
+  "datePublished": "2026-03-25T15:47:03.000Z",
+  "dateModified": "2026-03-25T15:49:59.017Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "ytmTragodie",
+      "url": "https://ytmtragodie.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://ytmtragodie.github.io/2026/03/25/SpringBoot-%E5%8C%BB%E7%96%97%E7%A4%BE%E5%8C%BA%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1a1a1a')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SpringBoot 医疗社区前后端项目记录',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/images/bg-underwater.jpg);"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">ytmTragodie</span></a><a class="nav-page-title" href="/"><span class="site-name">SpringBoot 医疗社区前后端项目记录</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">SpringBoot 医疗社区前后端项目记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-25T15:47:03.000Z" title="发表于 2026-03-25 23:47:03">2026-03-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-25T15:49:59.017Z" title="更新于 2026-03-25 23:49:59">2026-03-25</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="项目与部署记录"><a href="#项目与部署记录" class="headerlink" title="项目与部署记录"></a>项目与部署记录</h1><p><img src="https://img.shields.io/badge/Java-21-ED8936?style=for-the-badge&logo=java" alt="Java"><img src="https://img.shields.io/badge/Spring_Boot-3.3.5-6DB33F?style=for-the-badge&logo=springboot" alt="Spring Boot"><img src="https://img.shields.io/badge/Vue-3.5.24-42B883?style=for-the-badge&logo=vue.js" alt="Vue"><img src="https://img.shields.io/badge/TypeScript-5.9.3-4377C1?style=for-the-badge&logo=typescript" alt="TypeScript"><img src="https://img.shields.io/badge/Docker-Latest-2496ED?style=for-the-badge&logo=docker" alt="Docker"></p>
+<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><h3 id="工具下载"><a href="#工具下载" class="headerlink" title="工具下载"></a>工具下载</h3><table>
+<thead>
+<tr>
+<th>工具名称</th>
+<th>项目使用版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>git</td>
+<td></td>
+</tr>
+<tr>
+<td>java</td>
+<td>21</td>
+</tr>
+<tr>
+<td>maven</td>
+<td>4.0.0</td>
+</tr>
+<tr>
+<td>docker(不必须)</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="项目创建与配置"><a href="#项目创建与配置" class="headerlink" title="项目创建与配置"></a>项目创建与配置</h3><table>
+<thead>
+<tr>
+<th>Extension Name</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Extension Pack For Java</td>
+<td>VSCode JAVA支持</td>
+</tr>
+<tr>
+<td>Spring Initializr Java Support</td>
+<td>快速生成Spring Boot 项目</td>
+</tr>
+<tr>
+<td>Remote-SSH</td>
+<td>SSH远程连接服务器</td>
+</tr>
+<tr>
+<td>Docker(非必要)</td>
+<td>方便容器化</td>
+</tr>
+</tbody></table>
+<h4 id="VSCode-插件配置"><a href="#VSCode-插件配置" class="headerlink" title="VSCode 插件配置"></a>VSCode 插件配置</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;maven.executable.path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;X:\\ProgramFiles\\javamaven\\apache-maven-3.9.12\\bin\\mvn.cmd&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;git.path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;X:\\ProgramFiles\\PortableGit\\bin\\git.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;java.import.gradle.java.home&quot;</span><span class="punctuation">:</span> <span class="string">&quot;X:\\ProgramFiles\\javamaven\\java21\\jdk-21.0.10&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;java.jdt.ls.java.home&quot;</span><span class="punctuation">:</span> <span class="string">&quot;X:\\ProgramFiles\\javamaven\\java21\\jdk-21.0.10&quot;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="VSCode-中-Java-相关环境变量配置"><a href="#VSCode-中-Java-相关环境变量配置" class="headerlink" title="VSCode 中 Java 相关环境变量配置"></a>VSCode 中 Java 相关环境变量配置</h4><p>由于电脑中有很多个版本的JAVA，因此将JAVA相关的环境变量都设置了局部环境变量，仅适用于VSCode的WorkSpace</p>
+<p><strong>以下是workspace 的设置</strong></p>
+<p>由于项目包含了前端和后端，为了使得侧边栏查看时条理清晰，因此设置了不同的folder展示不同的部分</p>
+ <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;folders&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">		<span class="punctuation">&#123;</span></span><br><span class="line">			<span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;demo&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./demo&quot;</span></span><br><span class="line">		<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="punctuation">&#123;</span></span><br><span class="line">			<span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;frontend&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;./frontend&quot;</span></span><br><span class="line">		<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="punctuation">&#123;</span></span><br><span class="line">			<span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;root&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;.&quot;</span></span><br><span class="line">		<span class="punctuation">&#125;</span></span><br><span class="line">	<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;settings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;files.exclude&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">			<span class="attr">&quot;demo&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;frontend&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">		<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;java.compile.nullAnalysis.mode&quot;</span><span class="punctuation">:</span> <span class="string">&quot;automatic&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;terminal.integrated.env.windows&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">			<span class="attr">&quot;JAVA_HOME&quot;</span><span class="punctuation">:</span> <span class="string">&quot;X:\\ProgramFiles\\javamaven\\java21\\jdk-21.0.10&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;MAVEN_HOME&quot;</span><span class="punctuation">:</span> <span class="string">&quot;X:\\ProgramFiles\\javamaven\\apache-maven-3.9.12&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;PATH&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;env:PATH&#125;;X:\\ProgramFiles\\javamaven\\java21\\jdk-21.0.10\\bin;X:\\ProgramFiles\\javamaven\\apache-maven-3.9.12\\bin;X:\\ProgramFiles\\PortableGit\\bin;X:\\ProgramFiles\\Nodejs\\node_global&quot;</span></span><br><span class="line">		<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;java.configuration.updateBuildConfiguration&quot;</span><span class="punctuation">:</span> <span class="string">&quot;interactive&quot;</span><span class="punctuation">,</span></span><br><span class="line">		<span class="attr">&quot;maven.terminal.customEnv&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">			<span class="punctuation">&#123;</span></span><br><span class="line">				<span class="attr">&quot;environmentVariable&quot;</span><span class="punctuation">:</span> <span class="string">&quot;JAVA_HOME&quot;</span><span class="punctuation">,</span></span><br><span class="line">				<span class="attr">&quot;value&quot;</span><span class="punctuation">:</span> <span class="string">&quot;X:\\ProgramFiles\\javamaven\\java21\\jdk-21.0.10&quot;</span></span><br><span class="line">			<span class="punctuation">&#125;</span></span><br><span class="line">		<span class="punctuation">]</span></span><br><span class="line">	<span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>terminal.integrated.env.windows</code> ： 设置VScode 内置的命令行中的环境变量，此处设置了JAVA位置</p>
+<p> <code>maven.terminal.customEnv</code>: 设置 Java Maven 有关的插件的环境变量，此处设置了JAVA位置</p>
+<h3 id="创建JAVA-Spring-Boot-后端项目"><a href="#创建JAVA-Spring-Boot-后端项目" class="headerlink" title="创建JAVA Spring Boot 后端项目"></a>创建JAVA Spring Boot 后端项目</h3><h2 id="项目开发"><a href="#项目开发" class="headerlink" title="项目开发"></a>项目开发</h2><p>请参考其他帖子</p>
+<h2 id="项目部署"><a href="#项目部署" class="headerlink" title="项目部署"></a>项目部署</h2><p>开发完成后，考虑部署到云服务器</p>
+<h3 id="撰写Dockerfile"><a href="#撰写Dockerfile" class="headerlink" title="撰写Dockerfile"></a>撰写Dockerfile</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># syntax=docker/dockerfile:1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------- 1) Build stage ----------</span></span><br><span class="line"><span class="keyword">FROM</span> maven:<span class="number">3.9</span>.<span class="number">9</span>-eclipse-temurin-<span class="number">21</span> AS builder</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy Maven wrapper and pom first to leverage Docker layer cache.</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> pom.xml ./ </span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> .mvn .mvn</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> mvnw ./</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> mvnw.cmd ./</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Download dependencies in advance (cached if pom.xml unchanged).</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> mvn -q -DskipTests dependency:go-offline</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy source code and package application jar.</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> src ./src</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> mvn -q clean package -DskipTests</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># ---------- 2) Runtime stage ----------</span></span><br><span class="line"><span class="keyword">FROM</span> eclipse-temurin:<span class="number">21</span>-jre</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create non-root user for safer container runtime.</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> useradd -m spring</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 data 目录并设置权限</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> <span class="built_in">mkdir</span> -p /app/data &amp;&amp; <span class="built_in">chown</span> -R spring:spring /app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">USER</span> spring</span><br><span class="line"></span><br><span class="line"><span class="comment"># Copy fat jar generated by Spring Boot Maven plugin.</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /app/target/demo-0.0.1-SNAPSHOT.jar app.jar</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制 H2 数据文件（假设在项目的 backend/data 目录下）</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --<span class="built_in">chown</span>=1000:1000 data/ ./data/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Spring Boot default port.</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Allow JVM options from runtime environment.</span></span><br><span class="line"><span class="keyword">ENV</span> JAVA_OPTS=<span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Start command.</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="string">&quot;sh&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;java <span class="variable">$JAVA_OPTS</span> -jar app.jar&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Dockerfile 的撰写规则与原理</strong></p>
+<h3 id="代码上传到远程仓库并设置Token"><a href="#代码上传到远程仓库并设置Token" class="headerlink" title="代码上传到远程仓库并设置Token"></a>代码上传到远程仓库并设置Token</h3><p>代码上传至Github</p>
+<p><strong>在 GitHub 生成 Personal Access Token</strong></p>
+<ol>
+<li>登录 GitHub</li>
+<li>点击右上角头像 → <strong>Settings</strong></li>
+<li>左侧菜单最底部 → <strong>Developer settings</strong></li>
+<li>左侧 → <strong>Personal access tokens</strong> → <strong>Tokens (classic)</strong></li>
+<li>点击 <strong>Generate new token (classic)</strong></li>
+<li>填写 Note（如 <code>server-deploy</code>），勾选 <strong>repo</strong> 权限</li>
+<li>滚动到底部点击 <strong>Generate token</strong></li>
+<li><strong>复制生成的 token</strong>（只会显示一次，如 <code>ghp_xxxxxxxxxxxx</code>）</li>
+</ol>
+<h3 id="创建并设置服务器"><a href="#创建并设置服务器" class="headerlink" title="创建并设置服务器"></a>创建并设置服务器</h3><p><img src="/../images/%E6%B1%82%E6%98%AF%E6%9D%AF%E5%89%8D%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%95%E7%AC%94%E8%AE%B0/%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%B1%BB%E5%9E%8B%E9%80%89%E6%8B%A9.png" alt="img"></p>
+<p>选 2核(vCPU) 4GiB 内存 的经济型 e 实例</p>
+<p><strong>为什么？</strong></p>
+<ul>
+<li><strong>内存足够</strong>：Spring Boot + Docker 运行时，系统本身占用约 300-500MB，Docker 守护进程约 100MB，你的应用限制在 256-512MB 堆内存，加起来 <strong>1.5GB 左右</strong>。4GB 内存有充足余量，不会因内存不足导致容器被杀死。</li>
+</ul>
+<p><img src="/../images/%E6%B1%82%E6%98%AF%E6%9D%AF%E5%89%8D%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%95%E7%AC%94%E8%AE%B0/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%82%E6%95%B0%E9%80%89%E6%8B%A9.png" alt="image"></p>
+<p><strong>推荐选择：Ubuntu 22.04 64位</strong> </p>
+<ul>
+<li><strong>Ubuntu</strong>：Docker 官方文档推荐，社区支持最好，遇到问题容易搜到解决方案。</li>
+</ul>
+<p>我选择了服务器预装Docker</p>
+<p><img src="/../images/%E6%B1%82%E6%98%AF%E6%9D%AF%E5%89%8D%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%95%E7%AC%94%E8%AE%B0/image-20260323200059346.png" alt="image-20260323200059346"></p>
+<p>创建成功后选择重置密码设置自己的密码</p>
+<h3 id="连接到服务器"><a href="#连接到服务器" class="headerlink" title="连接到服务器"></a>连接到服务器</h3><p>在 Windows 上打开 <strong>PowerShell</strong>，或者时<strong>VSCode</strong> 中的Terminal输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@你的公网IP</span><br></pre></td></tr></table></figure>
+
+<p>例如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@47.100.xx.xx</span><br></pre></td></tr></table></figure>
+
+<p>首次连接会提示：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The authenticity of host &#x27;47.100.xx.xx&#x27; can&#x27;t be established.</span><br><span class="line">ECDSA key fingerprint is SHA256:xxxxxxxx.</span><br><span class="line">Are you sure you want to continue connecting (yes/no)?</span><br></pre></td></tr></table></figure>
+
+<p>输入 <code>yes</code> 回车。</p>
+<p>然后输入密码（输入时不会显示），成功后会看到：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Ubuntu 22.04 LTS</span><br><span class="line">root@iZbp1xxxxxx:~#</span><br></pre></td></tr></table></figure>
+
+<h3 id="在服务器上克隆仓库并构建docker镜像"><a href="#在服务器上克隆仓库并构建docker镜像" class="headerlink" title="在服务器上克隆仓库并构建docker镜像"></a>在服务器上克隆仓库并构建docker镜像</h3><h4 id="克隆项目"><a href="#克隆项目" class="headerlink" title="克隆项目"></a>克隆项目</h4><blockquote>
+<p>[!NOTE]</p>
+<p>如果没有Git，则先下载Git</p>
+</blockquote>
+<p>在服务器上创建好目录，克隆代码</p>
+<p><code>git clone https://&#123;刚刚获得的Github Personal Token&#125;@github.com/&#123;用户名&#125;/&#123;项目名&#125;.git</code></p>
+<h4 id="构建Docker-镜像"><a href="#构建Docker-镜像" class="headerlink" title="构建Docker 镜像"></a>构建Docker 镜像</h4><ul>
+<li><p>cd 到dockerfile所在位置</p>
+</li>
+<li><p>构建docker 镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t my-backend .</span><br></pre></td></tr></table></figure>
+
+<p>这个过程会</p>
+<ul>
+<li>下载 Maven 和 JDK 镜像（第一次需要几分钟）</li>
+<li>编译打包你的 Spring Boot 项目</li>
+<li>生成名为 <code>my-backend</code> 的镜像</li>
+</ul>
+</li>
+</ul>
+<h4 id="运行容器"><a href="#运行容器" class="headerlink" title="运行容器"></a>运行容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name my-app -p 8080:8080 --restart unless-stopped my-backend</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>-d</code>：后台运行</li>
+<li><code>--name my-app</code>：容器命名</li>
+<li><code>-p 8080:8080</code>：主机端口映射到容器端口</li>
+<li><code>--restart unless-stopped</code>：服务器重启后自动启动容器</li>
+</ul>
+<p><em><strong>查看系统是否运行</strong></em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<p>*** 查看运行输出log***</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs &#123;容器名字&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="服务器开放防火墙端口"><a href="#服务器开放防火墙端口" class="headerlink" title="服务器开放防火墙端口"></a>服务器开放防火墙端口</h3><ol>
+<li>登录阿里云控制台 → 找到你的 ECS 实例</li>
+<li>点击实例名称进入详情页</li>
+<li>点击 <strong>安全组</strong> 标签</li>
+<li>点击安全组 ID 进入规则配置</li>
+<li>点击 <strong>手动添加</strong> 或 <strong>快速添加</strong></li>
+</ol>
+<p>添加一条入方向规则：</p>
+<table>
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">端口范围</td>
+<td align="left">8080&#x2F;8080</td>
+</tr>
+<tr>
+<td align="left">授权对象</td>
+<td align="left">0.0.0.0&#x2F;0</td>
+</tr>
+<tr>
+<td align="left">描述</td>
+<td align="left">允许 Spring Boot 访问</td>
+</tr>
+</tbody></table>
+<p><img src="/../images/%E6%B1%82%E6%98%AF%E6%9D%AF%E5%89%8D%E5%90%8E%E7%AB%AF%E8%AE%B0%E5%BD%95%E7%AC%94%E8%AE%B0/sshpermission.png" alt="img"></p>
+<p><strong>为了安全性，设置一下访问来源，只允许自己的IP 进行SSH连接</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://ytmtragodie.github.io">ytmTragodie</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://ytmtragodie.github.io/2026/03/25/SpringBoot-%E5%8C%BB%E7%96%97%E7%A4%BE%E5%8C%BA%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/">https://ytmtragodie.github.io/2026/03/25/SpringBoot-%E5%8C%BB%E7%96%97%E7%A4%BE%E5%8C%BA%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://ytmtragodie.github.io" target="_blank">ytmTragodie</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AC%94%E8%AE%B0/">笔记</a><a class="post-meta__tags" href="/tags/JAVA/">JAVA</a><a class="post-meta__tags" href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF/">前后端</a></div><div class="post-share"><div class="social-share" data-image="/img/thebends.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/02/03/Reading-Notes/" title=""><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2"></div></div><div class="info-2"><div class="info-item-1">The happiness Trap阅读笔记</div></div></div></a><a class="pagination-related" href="/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/" title="JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)</div></div><div class="info-2"><div class="info-item-1">Java Spring boot 后端笔记（1）–简介Spring 框架简介Spring 是一个轻量级的 Java 开发框架，旨在解决传统 Java EE 开发中代码臃肿、耦合度高、测试困难等问题。它最早由 Rod Johnson 在 2002 年提出，核心思想是 “让 Java 开发变得更简单、更优雅”。 Spring 提供了两大核心功能：  IoC（控制反转）容器：帮你管理对象的创建和依赖关系。 AOP（面向切面编程）：让你在不修改源代码的情况下，为程序添加额外功能（如日志、事务、权限等）。  1. IoC 控制反转​	在传统编程中，对象之间的依赖关系是由程序员主动“new”出来的，比如： 123public class OrderService &#123;    private PaymentService payment = new PaymentService(); // 硬编码依赖&#125;  这样做的问题：OrderService 和 PaymentService 高度耦合，难以替换、测试或扩展。 Spring 采用 IoC（控制反转）...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/" title="JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2026-03-28</div><div class="info-item-2">JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)</div></div><div class="info-2"><div class="info-item-1">Java Spring boot 后端笔记（1）–简介Spring 框架简介Spring 是一个轻量级的 Java 开发框架，旨在解决传统 Java EE 开发中代码臃肿、耦合度高、测试困难等问题。它最早由 Rod Johnson 在 2002 年提出，核心思想是 “让 Java 开发变得更简单、更优雅”。 Spring 提供了两大核心功能：  IoC（控制反转）容器：帮你管理对象的创建和依赖关系。 AOP（面向切面编程）：让你在不修改源代码的情况下，为程序添加额外功能（如日志、事务、权限等）。  1. IoC 控制反转​	在传统编程中，对象之间的依赖关系是由程序员主动“new”出来的，比如： 123public class OrderService &#123;    private PaymentService payment = new PaymentService(); // 硬编码依赖&#125;  这样做的问题：OrderService 和 PaymentService 高度耦合，难以替换、测试或扩展。 Spring 采用 IoC（控制反转）...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/thebends.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">ytmTragodie</div><div class="author-info-description">You can't miss what you forget</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ytmTragodie"><i class="fab fa-github"></i><span>关注我</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">项目与部署记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.</span> <span class="toc-text">环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E5%85%B7%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.1.1.</span> <span class="toc-text">工具下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text">项目创建与配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#VSCode-%E6%8F%92%E4%BB%B6%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">VSCode 插件配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VSCode-%E4%B8%AD-Java-%E7%9B%B8%E5%85%B3%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">VSCode 中 Java 相关环境变量配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAJAVA-Spring-Boot-%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.1.3.</span> <span class="toc-text">创建JAVA Spring Boot 后端项目</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91"><span class="toc-number">1.2.</span> <span class="toc-text">项目开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2"><span class="toc-number">1.3.</span> <span class="toc-text">项目部署</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%92%B0%E5%86%99Dockerfile"><span class="toc-number">1.3.1.</span> <span class="toc-text">撰写Dockerfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%B9%B6%E8%AE%BE%E7%BD%AEToken"><span class="toc-number">1.3.2.</span> <span class="toc-text">代码上传到远程仓库并设置Token</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%AE%BE%E7%BD%AE%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">创建并设置服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">1.3.4.</span> <span class="toc-text">连接到服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%85%8B%E9%9A%86%E4%BB%93%E5%BA%93%E5%B9%B6%E6%9E%84%E5%BB%BAdocker%E9%95%9C%E5%83%8F"><span class="toc-number">1.3.5.</span> <span class="toc-text">在服务器上克隆仓库并构建docker镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%8B%E9%9A%86%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">克隆项目</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9E%84%E5%BB%BADocker-%E9%95%9C%E5%83%8F"><span class="toc-number">1.3.5.2.</span> <span class="toc-text">构建Docker 镜像</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="toc-number">1.3.5.3.</span> <span class="toc-text">运行容器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E6%94%BE%E9%98%B2%E7%81%AB%E5%A2%99%E7%AB%AF%E5%8F%A3"><span class="toc-number">1.3.6.</span> <span class="toc-text">服务器开放防火墙端口</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/" title="JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)">JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)</a><time datetime="2026-03-28T13:10:55.000Z" title="发表于 2026-03-28 21:10:55">2026-03-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/25/SpringBoot-%E5%8C%BB%E7%96%97%E7%A4%BE%E5%8C%BA%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="SpringBoot 医疗社区前后端项目记录">SpringBoot 医疗社区前后端项目记录</a><time datetime="2026-03-25T15:47:03.000Z" title="发表于 2026-03-25 23:47:03">2026-03-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/03/Reading-Notes/" title="无标题">无标题</a><time datetime="2026-02-03T06:55:38.821Z" title="发表于 2026-02-03 14:55:38">2026-02-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/01/hello-world/" title="Hello World">Hello World</a><time datetime="2025-07-01T10:01:43.847Z" title="发表于 2025-07-01 18:01:43">2025-07-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By ytmTragodie</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
