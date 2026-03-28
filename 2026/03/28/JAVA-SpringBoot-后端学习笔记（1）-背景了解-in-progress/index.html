@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress) | ytmTragodie</title><meta name="author" content="ytmTragodie"><meta name="copyright" content="ytmTragodie"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="Java Spring boot 后端笔记（1）–简介Spring 框架简介Spring 是一个轻量级的 Java 开发框架，旨在解决传统 Java EE 开发中代码臃肿、耦合度高、测试困难等问题。它最早由 Rod Johnson 在 2002 年提出，核心思想是 “让 Java 开发变得更简单、更优雅”。 Spring 提供了两大核心功能：  IoC（控制反转）容器：帮你管理对象的创建和依赖关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)">
+<meta property="og:url" content="http://example.com/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/index.html">
+<meta property="og:site_name" content="ytmTragodie">
+<meta property="og:description" content="Java Spring boot 后端笔记（1）–简介Spring 框架简介Spring 是一个轻量级的 Java 开发框架，旨在解决传统 Java EE 开发中代码臃肿、耦合度高、测试困难等问题。它最早由 Rod Johnson 在 2002 年提出，核心思想是 “让 Java 开发变得更简单、更优雅”。 Spring 提供了两大核心功能：  IoC（控制反转）容器：帮你管理对象的创建和依赖关系">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/butterfly-icon.png">
+<meta property="article:published_time" content="2026-03-28T13:10:55.000Z">
+<meta property="article:modified_time" content="2026-03-28T13:14:28.965Z">
+<meta property="article:author" content="ytmTragodie">
+<meta property="article:tag" content="keywords">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/butterfly-icon.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)",
+  "url": "http://example.com/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/",
+  "image": "http://example.com/img/butterfly-icon.png",
+  "datePublished": "2026-03-28T13:10:55.000Z",
+  "dateModified": "2026-03-28T13:14:28.965Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "ytmTragodie",
+      "url": "http://example.com/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/images/bg-underwater.jpg);"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">ytmTragodie</span></a><a class="nav-page-title" href="/"><span class="site-name">JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)</span></a></span><div id="menus"></div></nav><div id="post-info"><h1 class="post-title">JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-03-28T13:10:55.000Z" title="发表于 2026-03-28 21:10:55">2026-03-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-03-28T13:14:28.965Z" title="更新于 2026-03-28 21:14:28">2026-03-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="Java-Spring-boot-后端笔记（1）–简介"><a href="#Java-Spring-boot-后端笔记（1）–简介" class="headerlink" title="Java Spring boot 后端笔记（1）–简介"></a>Java Spring boot 后端笔记（1）–简介</h1><h2 id="Spring-框架简介"><a href="#Spring-框架简介" class="headerlink" title="Spring 框架简介"></a>Spring 框架简介</h2><p>Spring 是一个<strong>轻量级的 Java 开发框架</strong>，旨在解决传统 Java EE 开发中代码臃肿、耦合度高、测试困难等问题。它最早由 Rod Johnson 在 2002 年提出，核心思想是 <strong>“让 Java 开发变得更简单、更优雅”</strong>。</p>
+<p>Spring 提供了两大核心功能：</p>
+<ul>
+<li><strong>IoC（控制反转）容器</strong>：帮你管理对象的创建和依赖关系。</li>
+<li><strong>AOP（面向切面编程）</strong>：让你在不修改源代码的情况下，为程序添加额外功能（如日志、事务、权限等）。</li>
+</ul>
+<h3 id="1-IoC-控制反转"><a href="#1-IoC-控制反转" class="headerlink" title="1. IoC 控制反转"></a>1. IoC 控制反转</h3><p>​	在传统编程中，对象之间的依赖关系是由程序员主动“new”出来的，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">PaymentService</span> <span class="variable">payment</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PaymentService</span>(); <span class="comment">// 硬编码依赖</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样做的问题：<code>OrderService</code> 和 <code>PaymentService</code> 高度耦合，难以替换、测试或扩展。</p>
+<p>Spring 采用 <strong>IoC（控制反转）</strong> 思想：<strong>将对象的创建和依赖关系的维护交给容器来管理</strong>。只需要声明“我需要什么”，Spring 容器会在运行时自动把依赖的对象“注入”进来。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PaymentService payment;  <span class="comment">// 由 Spring 自动注入</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种 <strong>DI（依赖注入）</strong> 机制让代码变得松散耦合，易于测试和修改。可以轻松地替换实现类，或者在单元测试中使用 Mock 对象。</p>
+<h3 id="2-AOP（面向切面编程）"><a href="#2-AOP（面向切面编程）" class="headerlink" title="2. AOP（面向切面编程）"></a>2. AOP（面向切面编程）</h3><p>AOP 允许将那些<strong>与业务无关但多个模块都会用到的功能</strong>（如日志、事务、权限校验）抽取出来，称为“切面”，然后在运行时动态地“织入”到业务方法中。</p>
+<p>例如，可以在不修改任何业务代码的情况下，为所有 <code>Service</code> 类的方法统一添加事务管理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">transferMoney</span><span class="params">(…)</span> &#123; … &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-Spring各模块"><a href="#3-Spring各模块" class="headerlink" title="3. Spring各模块"></a>3. Spring各模块</h3><p>Spring 并不是一个巨大的单体框架，而是采用<strong>模块化设计</strong>，你可以根据项目需要选择使用哪些模块：</p>
+<table>
+<thead>
+<tr>
+<th align="left">模块</th>
+<th align="left">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Spring Core</strong></td>
+<td align="left">提供 IoC 容器的基础功能</td>
+</tr>
+<tr>
+<td align="left"><strong>Spring AOP</strong></td>
+<td align="left">面向切面编程支持</td>
+</tr>
+<tr>
+<td align="left"><strong>Spring JDBC &#x2F; ORM</strong></td>
+<td align="left">简化数据库访问（JdbcTemplate、事务管理）</td>
+</tr>
+<tr>
+<td align="left"><strong>Spring MVC</strong></td>
+<td align="left">Web 层框架，用于构建 REST API 或传统 Web 应用</td>
+</tr>
+<tr>
+<td align="left"><strong>Spring Security</strong></td>
+<td align="left">认证与授权</td>
+</tr>
+<tr>
+<td align="left"><strong>Spring Test</strong></td>
+<td align="left">单元测试与集成测试支持</td>
+</tr>
+<tr>
+<td align="left">…</td>
+<td align="left"></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>Spring</strong> 提供了基础能力（IoC、AOP、数据访问、MVC 等），但配置相对繁琐。你需要手动配置数据源、事务管理器、视图解析器等，还要管理各种依赖的版本。</li>
+<li><strong>Spring Boot</strong> 是在 Spring 之上构建的<strong>快速开发框架</strong>，它采用“约定优于配置”的思想，自动帮你完成这些配置，并提供起步依赖（Starter）来简化依赖管理。</li>
+</ul>
+<h2 id="Spring-Boot"><a href="#Spring-Boot" class="headerlink" title="Spring Boot"></a>Spring Boot</h2><p>Spring Boot 是 <strong>Spring 框架的一个子项目</strong>，它并不是取代 Spring，而是在 Spring 的基础上做了一层“封装”和“自动化配置”，目的是让你<strong>以最小的代价、最少的配置</strong>快速创建一个独立运行的 Spring 应用。</p>
+<p>可以理解为一个 <strong>“开箱即用的 Spring 应用脚手架”</strong>——不用再去手动配置一大堆 XML 或 Java Config，不用操心依赖版本兼容性，甚至不用自己部署 Web 服务器，因为 Spring Boot 已经内置了 Tomcat、Jetty 等服务器。</p>
+<h3 id="1-核心思想"><a href="#1-核心思想" class="headerlink" title="1.核心思想"></a>1.核心思想</h3><p>Spring Boot 最核心的设计哲学是 <strong>“约定优于配置”（Convention over Configuration）</strong>。</p>
+<p>传统 Spring 开发中，你需要写大量配置：数据源配置、事务管理、视图解析器、扫描包路径……稍不注意就会出错。Spring Boot 则根据“常规开发习惯”给出了<strong>一套默认的约定</strong>，如果你遵循这些约定，几乎不需要任何配置；如果你需要自定义，只需在配置文件里修改几个属性即可。</p>
+<p>例如：</p>
+<ul>
+<li>默认扫描主启动类所在包及其子包下的组件（<code>@SpringBootApplication</code> 就包含了 <code>@ComponentScan</code>）</li>
+<li>默认的静态资源路径是 <code>classpath:/static/</code>、<code>classpath:/public/</code></li>
+<li>默认的配置文件是 <code>application.properties</code> 或 <code>application.yml</code></li>
+</ul>
+<p><strong>好处</strong>：只需要关注业务逻辑，框架帮你处理了底层繁琐的配置。</p>
+<h3 id="2-主要原理"><a href="#2-主要原理" class="headerlink" title="2.主要原理"></a>2.主要原理</h3><p>Spring Boot 有两个核心机制：<strong>起步依赖（Starter）</strong> 和 <strong>自动配置（AutoConfiguration）</strong>。</p>
+<p>Spring Boot 提供了一系列“场景启动器”，比如：</p>
+<ul>
+<li><code>spring-boot-starter-web</code>：包含 Spring MVC、内置 Tomcat、Jackson 等，用于开发 Web 应用</li>
+<li><code>spring-boot-starter-data-jpa</code>：包含 JPA、Hibernate、数据库连接池等</li>
+<li><code>spring-boot-starter-test</code>：包含 JUnit、Mockito 等测试依赖</li>
+</ul>
+<p>只需要在 <code>pom.xml</code> 中添加一个 starter，所有相关的依赖就会自动加入，并且版本号经过充分测试，避免了依赖冲突。</p>
+<p>当你的项目引入了某个 starter，Spring Boot 会根据 <strong>类路径下是否存在某个类</strong> 来自动配置相应的功能。</p>
+<p>例如：</p>
+<ul>
+<li>类路径下有 <code>H2Database</code> 的类，就自动配置一个 H2 数据源</li>
+<li>类路径下有 <code>Servlet</code>、<code>Spring MVC</code> 相关类，就自动配置 DispatcherServlet 和嵌入式 Tomcat</li>
+</ul>
+<p><strong>背后的原理</strong>：Spring Boot 在启动时会加载 <code>META-INF/spring.factories</code> 文件中定义的所有自动配置类，这些配置类使用 <code>@Conditional</code> 系列注解（如 <code>@ConditionalOnClass</code>、<code>@ConditionalOnMissingBean</code>）来判断条件是否满足，从而决定是否生效。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(DataSource.class)</span></span><br><span class="line"><span class="meta">@ConditionalOnMissingBean(DataSource.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DataSourceAutoConfiguration</span> &#123;</span><br><span class="line">    <span class="comment">// 自动配置数据源</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p> 入依赖 → 框架检测到依赖 → 自动帮你配置好对应的组件，你只需要写业务代码。</p>
+</blockquote>
+<h2 id="Spring-Boot-项目架构"><a href="#Spring-Boot-项目架构" class="headerlink" title="Spring Boot 项目架构"></a>Spring Boot 项目架构</h2><p>一个标准的 Spring Boot 项目推荐采用 <strong>分层架构</strong>，常见的包（文件夹）如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">com.example.project</span><br><span class="line">├── controller        // 存放控制器类，处理请求映射</span><br><span class="line">├── service           // 存放业务逻辑接口和实现类</span><br><span class="line">├── repository        // 存放数据访问层接口（如 JPA Repository）</span><br><span class="line">├── model / entity    // 存放实体类、DTO（数据传输对象）</span><br><span class="line">├── config            // 存放配置类</span><br><span class="line">├── util / util       // 存放工具类</span><br><span class="line">└── ...               // 其他如 exception、aspect 等</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Spring-Data-JPA"><a href="#Spring-Data-JPA" class="headerlink" title="Spring Data JPA"></a>Spring Data JPA</h2><p>Spring Data JPA 是 Spring Data 项目的一部分，它提供了一套基于 JPA 的 Repository 抽象。开发者只需定义继承自 <code>JpaRepository</code> 或 <code>CrudRepository</code> 的接口，Spring 就会在运行时自动生成实现类，并提供常见的 CRUD、分页、排序等操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserRepository</span> <span class="keyword">extends</span> <span class="title class_">JpaRepository</span>&lt;User, Long&gt; &#123;</span><br><span class="line">    Optional&lt;User&gt; <span class="title function_">findByUsername</span><span class="params">(String username)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这个接口，无需编写实现，就拥有了 <code>save</code>、<code>findById</code>、<code>delete</code> 等方法，并且通过方法名 <code>findByUsername</code> 就能自动生成查询。</p>
+<h3 id="对数据访问封装的原理"><a href="#对数据访问封装的原理" class="headerlink" title="对数据访问封装的原理"></a>对数据访问封装的原理</h3><p>Spring Data JPA 的核心原理可以概括为：<strong>接口驱动 + 动态代理 + 方法名解析 + EntityManager 操作</strong>。</p>
+<ul>
+<li>开发者定义一个继承 <code>Repository</code> 标记接口的子接口（如 <code>JpaRepository</code>）。</li>
+<li>在 Spring 容器启动时，通过 <code>@EnableJpaRepositories</code> 或自动配置，Spring 会扫描指定包下的所有 Repository 接口。</li>
+<li>对每个接口，<code>JpaRepositoryFactory</code> 会创建一个 <strong>动态代理</strong> 实例。该代理在运行时拦截对接口方法的调用，并根据方法名或注解决定执行何种数据库操作。</li>
+</ul>
+<p><strong>方法名解析机制</strong></p>
+<p>当调用一个自定义方法（如 <code>findByUsernameAndActiveTrue</code>）时，代理会解析方法名：</p>
+<ul>
+<li>解析前缀（<code>findBy</code>、<code>getBy</code>、<code>countBy</code> 等）。</li>
+<li>提取属性路径（<code>Username</code>、<code>Active</code>）。</li>
+<li>组合成 JPQL 查询条件，例如：<code>where username = ?1 and active = true</code>。</li>
+<li>使用 <code>EntityManager</code> 创建 <code>TypedQuery</code> 并执行。</li>
+</ul>
+<p>如果方法上标注了 <code>@Query</code>，则直接使用用户提供的 JPQL 或原生 SQL 语句，同样通过 <code>EntityManager</code> 执行。</p>
+<p><strong>底层依赖 EntityManager</strong></p>
+<p>所有 Repository 实现最终都依赖 JPA 的 <code>EntityManager</code>。Spring Data JPA 负责管理 <code>EntityManager</code> 的生命周期（通常是容器管理的 <code>PersistenceContext</code>），在代理方法内部调用 <code>entityManager.persist()</code>、<code>entityManager.find()</code>、<code>entityManager.createQuery()</code> 等 API 完成数据操作。</p>
+<p>默认情况下，Repository 的 CRUD 方法都带有 <code>@Transactional</code> 注解（只读方法有 <code>@Transactional(readOnly=true)</code>），确保每个操作在事务上下文中执行。用户也可以扩展事务边界到 Service 层。</p>
+<p><strong>与其它数据访问方式的对比</strong></p>
+<table>
+<thead>
+<tr>
+<th align="left">方式</th>
+<th align="left">优点</th>
+<th align="left">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Spring Data JPA</strong></td>
+<td align="left">开发效率高，自动实现，减少样板代码</td>
+<td align="left">复杂查询可能需要 JPQL 或原生 SQL；过度依赖动态代理可能增加调试难度</td>
+</tr>
+<tr>
+<td align="left"><strong>MyBatis</strong></td>
+<td align="left">SQL 完全可控，适合复杂查询</td>
+<td align="left">需要手写 SQL 和映射，代码量较大</td>
+</tr>
+<tr>
+<td align="left"><strong>原生 JDBC</strong></td>
+<td align="left">性能极致，完全控制</td>
+<td align="left">代码冗长，易出错，开发效率低</td>
+</tr>
+</tbody></table>
+<p><strong>JPA Repository</strong></p>
+<p>JPA Repository 是 Spring Data JPA 提供的一个核心接口，它抽象了数据访问层的实现细节，让开发者能够以极简的方式执行常见的数据库操作。它几乎出现在所有使用 JPA（如 Hibernate）的 Spring Boot 后端项目中，是连接业务逻辑与关系数据库的关键桥梁。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">ytmTragodie</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/">http://example.com/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">ytmTragodie</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/butterfly-icon.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2026/03/25/SpringBoot-%E5%8C%BB%E7%96%97%E7%A4%BE%E5%8C%BA%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="SpringBoot 医疗社区前后端项目记录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">SpringBoot 医疗社区前后端项目记录</div></div><div class="info-2"><div class="info-item-1">项目与部署记录 环境配置工具下载   工具名称 项目使用版本    git    java 21   maven 4.0.0   docker(不必须)    项目创建与配置   Extension Name Usage    Extension Pack For Java VSCode JAVA支持   Spring Initializr Java Support 快速生成Spring Boot 项目   Remote-SSH SSH远程连接服务器   Docker(非必要) 方便容器化   VSCode 插件配置1234&quot;maven.executable.path&quot;: &quot;X:\\ProgramFiles\\javamaven\\apache-maven-3.9.12\\bin\\mvn.cmd&quot;,&quot;git.path&quot;: &quot;X:\\ProgramFiles\\PortableGit\\bin\\git.exe&quot;,&quot;java.import.gradle.java.home&quot;:...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/butterfly-icon.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">ytmTragodie</div><div class="author-info-description">You can't miss what you forget</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java-Spring-boot-%E5%90%8E%E7%AB%AF%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%E2%80%93%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">Java Spring boot 后端笔记（1）–简介</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-%E6%A1%86%E6%9E%B6%E7%AE%80%E4%BB%8B"><span class="toc-number">1.1.</span> <span class="toc-text">Spring 框架简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-IoC-%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC"><span class="toc-number">1.1.1.</span> <span class="toc-text">1. IoC 控制反转</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-AOP%EF%BC%88%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">2. AOP（面向切面编程）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Spring%E5%90%84%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.3.</span> <span class="toc-text">3. Spring各模块</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot"><span class="toc-number">1.2.</span> <span class="toc-text">Spring Boot</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%BB%E8%A6%81%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.主要原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Boot-%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84"><span class="toc-number">1.3.</span> <span class="toc-text">Spring Boot 项目架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring-Data-JPA"><span class="toc-number">1.4.</span> <span class="toc-text">Spring Data JPA</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E5%B0%81%E8%A3%85%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.1.</span> <span class="toc-text">对数据访问封装的原理</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/28/JAVA-SpringBoot-%E5%90%8E%E7%AB%AF%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89-%E8%83%8C%E6%99%AF%E4%BA%86%E8%A7%A3-in-progress/" title="JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)">JAVA SpringBoot 后端学习笔记（1）--背景了解(in progress)</a><time datetime="2026-03-28T13:10:55.000Z" title="发表于 2026-03-28 21:10:55">2026-03-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/03/25/SpringBoot-%E5%8C%BB%E7%96%97%E7%A4%BE%E5%8C%BA%E5%89%8D%E5%90%8E%E7%AB%AF%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="SpringBoot 医疗社区前后端项目记录">SpringBoot 医疗社区前后端项目记录</a><time datetime="2026-03-25T15:47:03.000Z" title="发表于 2026-03-25 23:47:03">2026-03-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2026/02/03/Reading-Notes/" title="无标题">无标题</a><time datetime="2026-02-03T06:55:38.821Z" title="发表于 2026-02-03 14:55:38">2026-02-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/01/hello-world/" title="Hello World">Hello World</a><time datetime="2025-07-01T10:01:43.847Z" title="发表于 2025-07-01 18:01:43">2025-07-01</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By ytmTragodie</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.5</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
